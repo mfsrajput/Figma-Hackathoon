@@ -7,11 +7,15 @@ import { notFound } from 'next/navigation';
 
 
 interface ProductPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>; 
 }
 // Async component for fetching product details
 const ProductPage = async ({ params }: ProductPageProps) => {
-  const { id } = await params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
+  if (!id) {
+    return notFound();
+  }
   try {
     // Fetch product data from Sanity
     const product = await client.fetch(productById, { id });
@@ -19,12 +23,12 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     
     // If product doesn't exist, show a 404 page
     if (!product) {
-      notFound();
+      return notFound();
     }
   return <ProductDetail product={product} />;
 } catch (error) {
   console.error('Error fetching product:', error);
-    notFound(); // Show a 404 page if an error occurs
+  return notFound(); // Show a 404 page if an error occurs
   
 }
 
