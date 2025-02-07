@@ -1,12 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import HeroDefault from '@/components/HeroDefault';
 import { Product } from '../../../types/products';
 import { client } from '@/sanity/lib/client';
 import { allProducts } from '@/sanity/lib/queries';
 import ProductCard from '@/components/Productcard';
-import { urlFor } from '@/sanity/lib/image';
 import { useRouter } from 'next/navigation';
 
 const ShopPage =() => {

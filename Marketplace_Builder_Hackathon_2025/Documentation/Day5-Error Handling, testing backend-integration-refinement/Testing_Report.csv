@@ -1,0 +1,9 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Remarks
+TC001,Test navigation bar link,click each link in the navigation bar,Correct rendering,All links work correctly,Passed,High,verified
+TC002,Test sanity api output,Run Groq query to fetch data,Correct data as per check ,Data matches expectations,Passed,High,verified
+TC003,Test product listing,Fetch all product from Api,Product display correctly,Verified,Passed,High,No issue found
+TC004,Test dynamic product details,click on each product and verify data,Correct product details,Loaded correctly,Passed,High,Work as expected
+TC005,Test cart functionality,Add items,cart update correctly,Work as expected,Passed,High,Cart verified
+TC006,Test responsive,resize browser and check layout,layout adjust correctly,Work as expected,Passed,medium,verified
+TC007,Test checkout functionality,add and removed data in cart,Correct data’ load as per page,Work as expected,Passed,High,verified
+TC008,Test Valid Login,Click to cart or login icon,user logged in,Work as expected,Passed,High,verified

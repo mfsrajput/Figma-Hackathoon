@@ -24,7 +24,11 @@ export function HeroSection() {
       </div>
       <div className="absolute inset-0 z-[-1]">
       
-        <Image src={heroImg} alt="Hero Image" layout="fill" objectFit="cover" />
+        <Image   src="/_next/static/media/HeroImg.58064092.png" 
+  width={1300}  // Set an appropriate width
+  height={250} // Set an appropriate height
+  style={{ objectFit: 'cover' }} 
+  alt="Hero Image" />
       </div>
     </section>
   );

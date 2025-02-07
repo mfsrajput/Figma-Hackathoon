@@ -1,11 +1,13 @@
 'use client'; 
 
 import { useState } from "react"
+import { useRouter, usePathname } from "next/navigation";
 import { Heart, Minus, Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { useCart } from "@/components/CartProvider"
+import { useAuth } from "@clerk/nextjs"
 
 type AddToCartFormProps = {
   productId: string;
@@ -21,8 +23,17 @@ export default function AddToCartForm({ productId, name, price, image, onAddToCa
   const [size, setSize] = useState("M")
   const [color, setColor] = useState("purple")
   const { dispatch } = useCart()
+  const router = useRouter(); // Initialize router
+  const { isSignedIn } = useAuth();
+  const pathname = usePathname(); // Get current page URL
 
   const handleAddToCart = () => {
+    if (!isSignedIn) {
+      router.push(`/sign-in?redirect=${pathname}`); // Redirect to sign-in page
+      return;
+    }
+
+    // Proceed to add item to cart if user is signed in
     dispatch({
       type: "ADD_ITEM",
       payload: {
@@ -42,6 +53,7 @@ export default function AddToCartForm({ productId, name, price, image, onAddToCa
 
   // Disabled button condition
   const isAddToCartDisabled = !size || !color;
+ 
 
   return (
     <div className="space-y-6">
@@ -118,12 +130,13 @@ export default function AddToCartForm({ productId, name, price, image, onAddToCa
           </Button>
         </div>
 
-        {/* Add to Cart Button */}
-        <Button
-          onClick={handleAddToCart}
-          className="flex-1"
-          disabled={isAddToCartDisabled}
-        >
+
+        
+        
+
+
+              {/* Add to Cart Button */}
+        <Button onClick={handleAddToCart} className="flex-1" disabled={isAddToCartDisabled}>
           Add To Cart
         </Button>
 
