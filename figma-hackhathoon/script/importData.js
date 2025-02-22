@@ -10,7 +10,7 @@ const client = createClient({
 
 async function uploadImageToSanity(imageUrl) {
   try {
-    console.log(`Uploading image: ${imageUrl}`);
+    // console.log(`Uploading image: ${imageUrl}`);
 
     const response = await fetch(imageUrl);
     if (!response.ok) {
@@ -24,10 +24,10 @@ async function uploadImageToSanity(imageUrl) {
       filename: imageUrl.split('/').pop(),
     });
 
-    console.log(`Image uploaded successfully: ${asset._id}`);
+    // console.log(`Image uploaded successfully: ${asset._id}`);
     return asset._id;
   } catch (error) {
-    console.error('Failed to upload image:', imageUrl, error);
+    // console.error('Failed to upload image:', imageUrl, error);
     return null;
   }
 }
@@ -54,9 +54,9 @@ async function uploadProduct(product) {
       };
 
       const createdProduct = await client.create(document);
-      console.log(`Product ${product.title} uploaded successfully:`, createdProduct);
+      // console.log(`Product ${product.title} uploaded successfully:`, createdProduct);
     } else {
-      console.log(`Product ${product.title} skipped due to image upload failure.`);
+      // console.log(`Product ${product.title} skipped due to image upload failure.`);
     }
   } catch (error) {
     console.error('Error uploading product:', error);

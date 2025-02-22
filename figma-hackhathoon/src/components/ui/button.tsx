@@ -7,6 +7,7 @@ type ButtonProps = {
   variant?: "outline" | "ghost" | "filled"; // Button variant
   size?: "sm" | "md" | "lg"; // Button size
   disabled?: boolean; // Button disabled state
+  type?: "button" | "submit" | "reset";
 };
 
 export const Button = ({

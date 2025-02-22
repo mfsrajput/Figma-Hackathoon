@@ -13,8 +13,8 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ product }: ProductDetailProps) => {
-  const [showPopup, setShowPopup] = useState(false); // State for popup
-  const [popupMessage, setPopupMessage] = useState(''); // State for popup message
+  // const [showPopup, setShowPopup] = useState(false); // State for popup
+  // const [popupMessage, setPopupMessage] = useState(''); // State for popup message
   // console.log('Product Image:', product.productImage);
   const productImageUrl = product.productImage?.asset?._ref
     ? urlFor(product.productImage).url()
@@ -22,12 +22,13 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
     // console.log('Product Image URL:', productImageUrl); 
       // Function to show popup
   const handleAddToCart = () => {
-    setPopupMessage(`${product.title} has been added to your cart`);
-    setShowPopup(true);
+    // setPopupMessage(`${product.title} has been added to your cart`);
+    // setShowPopup(true);
     
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 2000); // Hide after 2 seconds
+    // setTimeout(() => {
+    //   setShowPopup(false);
+    // }, 2000); // Hide after 2 seconds
+    alert(`${product.title} has been added to your cart`);
   };
   
 
@@ -112,11 +113,11 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
         </div>
       </div>
       {/* Popup for Add to Cart */}
-      {showPopup && (
+      {/* {showPopup && (
         <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-md">
           {popupMessage}
         </div>
-      )}
+      )} */}
       <BrowseRange/>
       {/* Frame Component */}
       <Frame/>

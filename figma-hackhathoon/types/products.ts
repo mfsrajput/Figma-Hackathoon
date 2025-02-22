@@ -11,5 +11,5 @@ export interface Product {
     price: number;
     tags: string[];
     discountPercentage?: number;
-    isNew: boolean;
+    isNew?: boolean;  // ✅ Make it optional
 }

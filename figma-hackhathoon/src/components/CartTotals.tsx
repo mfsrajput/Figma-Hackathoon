@@ -1,24 +1,29 @@
+// src/components/CartTotals.tsx
 'use client'
 
-import { useCart } from "@/components/CartProvider"
-import { Button } from "@/components/ui/button"
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/redux/store'
+import { Button } from '@/components/ui/button'
+import { clearCart } from '@/redux/slices/cartSlice'
 
 export default function CartTotals() {
-  const { state } = useCart()
+  const dispatch = useDispatch()
+  const cartItems = useSelector((state: RootState) => state.cart.items)
 
-  // Subtotal calculation
-  const subtotal = state.items.reduce(
+  const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   )
 
-  // Example of a fixed tax rate and shipping fee
   const taxRate = 0.1 // 10%
   const shippingFee = 1500 // Flat shipping fee
 
-  // Calculate tax and total with shipping
   const tax = subtotal * taxRate
   const total = subtotal + tax + shippingFee
+
+  const handleClearCart = () => {
+    dispatch(clearCart()) // Dispatch clearCart action
+  }
 
   return (
     <div className="bg-muted/30 p-6 rounded-lg">
@@ -41,7 +46,13 @@ export default function CartTotals() {
           <span>Rs. {total.toLocaleString()}</span>
         </div>
       </div>
-      <Button className="w-full">Check Out</Button>
+      <Button className="w-full" onClick={handleClearCart}>
+        Clear Cart
+      </Button>
     </div>
   )
 }
+
+
+
+

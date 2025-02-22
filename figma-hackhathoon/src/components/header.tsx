@@ -3,10 +3,18 @@ import Link from "next/link"
 import Image from "next/image"
 import { Heart, Search, ShoppingCart, User } from 'lucide-react'
 import LogoImg from "../../public/images/Meubel House_Logos-05.png"
-import { useUser, UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
 
 export function Header() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn } = useAuth();
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  // const { isSignedIn } = useUser();
   return (
     <header className="border-b">
       <div className="container mx-auto px-4 py-4">
@@ -30,12 +38,16 @@ export function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-          {isSignedIn ? (
-              <UserButton afterSignOutUrl="/" />
+          {hydrated ? (
+              isSignedIn ? (
+                <UserButton afterSignOutUrl="/" />
+              ) : (
+                <Link href="/sign-in" className="p-2 hover:text-[#B88E2F]">
+                  <User className="h-5 w-5" />
+                </Link>
+              )
             ) : (
-              <Link href="/sign-in" className="p-2 hover:text-[#B88E2F]">
-                <User className="h-5 w-5" />
-              </Link>
+              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div> // Placeholder for SSR
             )}
             <button className="p-2 hover:text-[#B88E2F]">
               <Search className="h-5 w-5" />
